@@ -1,9 +1,14 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 
-export default function Footer() {
+interface FooterProps {
+  hideContactForm?: boolean;
+}
+
+export default function Footer({ hideContactForm = false }: FooterProps) {
   const [formState, setFormState] = useState({
     name: "",
     email: "",
@@ -44,159 +49,162 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
         {/* Contact Form & Info Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 pb-16 border-b border-slate-800">
-          
-          {/* Left Side: Contact Info & Value Prop */}
-          <div className="lg:col-span-5 space-y-8">
-            <div className="space-y-4">
-              <span className="font-heading text-2xl font-extrabold tracking-tight text-white flex items-center">
-                Way<span className="text-secondary">Insight</span>
-              </span>
-              <p className="text-sm text-slate-400 leading-relaxed font-sans">
-                Transforming classrooms with immersive technology. We partner with state governments, CSR departments, and school administrations to bring world-class spatial education to rural and urban government schools.
-              </p>
-            </div>
-
-            <div className="space-y-4 pt-4 border-t border-slate-800/80">
-              <h4 className="text-sm font-bold text-white uppercase tracking-wider">Contact Details</h4>
-              <ul className="space-y-3.5 text-sm">
-                <li className="flex items-center gap-3.5">
-                  <Mail className="w-5 h-5 text-secondary shrink-0" />
-                  <a href="mailto:info@wayinsight.com" className="hover:text-secondary transition-colors duration-200">
-                    info@wayinsight.com
-                  </a>
-                </li>
-                <li className="flex items-center gap-3.5">
-                  <Phone className="w-5 h-5 text-secondary shrink-0" />
-                  <a href="tel:+919876543210" className="hover:text-secondary transition-colors duration-200">
-                    +91 98765 43210
-                  </a>
-                </li>
-                <li className="flex items-start gap-3.5">
-                  <MapPin className="w-5 h-5 text-secondary shrink-0 mt-0.5" />
-                  <span>
-                    3rd Floor, Tech Innovation Block,<br />
-                    Sector-44, Gurugram, Haryana - 122003
-                  </span>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Right Side: Interactive Contact Form */}
-          <div className="lg:col-span-7 bg-slate-900/50 border border-slate-800/85 rounded-3xl p-8 shadow-xl">
-            <h4 className="text-lg font-bold font-heading text-white mb-6">Send Us a Message</h4>
+        {!hideContactForm && (
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 pb-16 border-b border-slate-800">
             
-            {isSubmitted ? (
-              <div className="bg-secondary/10 border border-secondary/20 rounded-2xl p-6 text-center text-secondary space-y-2">
-                <h5 className="font-bold text-lg">Thank You!</h5>
-                <p className="text-xs">Your inquiry has been successfully sent. A representative will contact you shortly.</p>
+            {/* Left Side: Contact Info & Value Prop */}
+            <div className="lg:col-span-5 space-y-8">
+              <div className="space-y-4">
+                <span className="font-heading text-2xl font-extrabold tracking-tight text-white flex items-center">
+                  Way<span className="text-secondary">Insight</span>
+                </span>
+                <p className="text-sm text-slate-400 leading-relaxed font-sans">
+                  Transforming classrooms with immersive technology. We partner with state governments, CSR departments, and school administrations to bring world-class spatial education to rural and urban government schools.
+                </p>
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-4 font-sans text-sm">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+              <div className="space-y-4 pt-4 border-t border-slate-800/80">
+                <h4 className="text-sm font-bold text-white uppercase tracking-wider">Contact Details</h4>
+                <ul className="space-y-3.5 text-sm">
+                  <li className="flex items-center gap-3.5">
+                    <Mail className="w-5 h-5 text-secondary shrink-0" />
+                    <a href="mailto:info@wayinsight.com" className="hover:text-secondary transition-colors duration-200">
+                      info@wayinsight.com
+                    </a>
+                  </li>
+                  <li className="flex items-center gap-3.5">
+                    <Phone className="w-5 h-5 text-secondary shrink-0" />
+                    <a href="tel:+919876543210" className="hover:text-secondary transition-colors duration-200">
+                      +91 98765 43210
+                    </a>
+                  </li>
+                  <li className="flex items-start gap-3.5">
+                    <MapPin className="w-5 h-5 text-secondary shrink-0 mt-0.5" />
+                    <span>
+                      3rd Floor, Tech Innovation Block,<br />
+                      Sector-44, Gurugram, Haryana - 122003
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Right Side: Interactive Contact Form */}
+            <div className="lg:col-span-7 bg-slate-900/50 border border-slate-800/85 rounded-3xl p-8 shadow-xl">
+              <h4 className="text-lg font-bold font-heading text-white mb-6">Send Us a Message</h4>
+              
+              {isSubmitted ? (
+                <div className="bg-secondary/10 border border-secondary/20 rounded-2xl p-6 text-center text-secondary space-y-2">
+                  <h5 className="font-bold text-lg">Thank You!</h5>
+                  <p className="text-xs">Your inquiry has been successfully sent. A representative will contact you shortly.</p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4 font-sans text-sm">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-1">
+                      <label htmlFor="name" className="text-xs font-bold text-slate-400">Full Name</label>
+                      <input
+                        type="text"
+                        id="name"
+                        required
+                        value={formState.name}
+                        onChange={(e) => setFormState({ ...formState, name: e.target.value })}
+                        placeholder="e.g. Rajesh Kumar"
+                        className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-200 placeholder:text-slate-600 focus:outline-none focus:border-secondary transition-colors"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <label htmlFor="email" className="text-xs font-bold text-slate-400">Email Address</label>
+                      <input
+                        type="email"
+                        id="email"
+                        required
+                        value={formState.email}
+                        onChange={(e) => setFormState({ ...formState, email: e.target.value })}
+                        placeholder="e.g. rajesh@school.edu.in"
+                        className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-200 placeholder:text-slate-600 focus:outline-none focus:border-secondary transition-colors"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-1">
+                      <label htmlFor="org" className="text-xs font-bold text-slate-400">Organization / School Name</label>
+                      <input
+                        type="text"
+                        id="org"
+                        required
+                        value={formState.org}
+                        onChange={(e) => setFormState({ ...formState, org: e.target.value })}
+                        placeholder="e.g. GSSS Sector-14"
+                        className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-200 placeholder:text-slate-600 focus:outline-none focus:border-secondary transition-colors"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <label htmlFor="role" className="text-xs font-bold text-slate-400">I am a...</label>
+                      <select
+                        id="role"
+                        value={formState.role}
+                        onChange={(e) => setFormState({ ...formState, role: e.target.value })}
+                        className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-300 focus:outline-none focus:border-secondary transition-colors"
+                      >
+                        <option value="School Principal">School Principal / Teacher</option>
+                        <option value="Government Official">Government Official</option>
+                        <option value="CSR Partner">CSR Partner / Sponsor</option>
+                        <option value="NGO Partner">NGO Representative</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+                  </div>
+
                   <div className="space-y-1">
-                    <label htmlFor="name" className="text-xs font-bold text-slate-400">Full Name</label>
-                    <input
-                      type="text"
-                      id="name"
+                    <label htmlFor="message" className="text-xs font-bold text-slate-400">Message</label>
+                    <textarea
+                      id="message"
                       required
-                      value={formState.name}
-                      onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                      placeholder="e.g. Rajesh Kumar"
-                      className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-200 placeholder:text-slate-600 focus:outline-none focus:border-secondary transition-colors"
+                      rows={4}
+                      value={formState.message}
+                      onChange={(e) => setFormState({ ...formState, message: e.target.value })}
+                      placeholder="Describe your inquiry (e.g. interested in a 5-school pilot)..."
+                      className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-200 placeholder:text-slate-600 focus:outline-none focus:border-secondary transition-colors resize-none"
                     />
                   </div>
-                  <div className="space-y-1">
-                    <label htmlFor="email" className="text-xs font-bold text-slate-400">Email Address</label>
-                    <input
-                      type="email"
-                      id="email"
-                      required
-                      value={formState.email}
-                      onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                      placeholder="e.g. rajesh@school.edu.in"
-                      className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-200 placeholder:text-slate-600 focus:outline-none focus:border-secondary transition-colors"
-                    />
-                  </div>
-                </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="space-y-1">
-                    <label htmlFor="org" className="text-xs font-bold text-slate-400">Organization / School Name</label>
-                    <input
-                      type="text"
-                      id="org"
-                      required
-                      value={formState.org}
-                      onChange={(e) => setFormState({ ...formState, org: e.target.value })}
-                      placeholder="e.g. GSSS Sector-14"
-                      className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-200 placeholder:text-slate-600 focus:outline-none focus:border-secondary transition-colors"
-                    />
-                  </div>
-                  <div className="space-y-1">
-                    <label htmlFor="role" className="text-xs font-bold text-slate-400">I am a...</label>
-                    <select
-                      id="role"
-                      value={formState.role}
-                      onChange={(e) => setFormState({ ...formState, role: e.target.value })}
-                      className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-300 focus:outline-none focus:border-secondary transition-colors"
-                    >
-                      <option value="School Principal">School Principal / Teacher</option>
-                      <option value="Government Official">Government Official</option>
-                      <option value="CSR Partner">CSR Partner / Sponsor</option>
-                      <option value="NGO Partner">NGO Representative</option>
-                      <option value="Other">Other</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div className="space-y-1">
-                  <label htmlFor="message" className="text-xs font-bold text-slate-400">Message</label>
-                  <textarea
-                    id="message"
-                    required
-                    rows={4}
-                    value={formState.message}
-                    onChange={(e) => setFormState({ ...formState, message: e.target.value })}
-                    placeholder="Describe your inquiry (e.g. interested in a 5-school pilot)..."
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-200 placeholder:text-slate-600 focus:outline-none focus:border-secondary transition-colors resize-none"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full bg-secondary hover:bg-teal-600 text-white font-bold py-3.5 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg shadow-secondary/15 hover:scale-101 cursor-pointer"
-                >
-                  <Send className="w-4.5 h-4.5" />
-                  Submit Inquiry
-                </button>
-              </form>
-            )}
+                  <button
+                    type="submit"
+                    className="w-full bg-secondary hover:bg-teal-600 text-white font-bold py-3.5 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg shadow-secondary/15 hover:scale-101 cursor-pointer"
+                  >
+                    <Send className="w-4.5 h-4.5" />
+                    Submit Inquiry
+                  </button>
+                </form>
+              )}
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Footer Links & Newsletter Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 py-12 border-b border-slate-800 text-sm">
-          {/* Column 1: Links */}
+          {/* Column 1: Quick Links */}
           <div className="space-y-4">
             <h5 className="font-bold text-white uppercase tracking-wider text-xs">Quick Links</h5>
             <ul className="space-y-2">
-              <li><a href="#home" className="hover:text-white transition-colors">Home</a></li>
-              <li><a href="#why-us" className="hover:text-white transition-colors">About Us</a></li>
-              <li><a href="#solutions" className="hover:text-white transition-colors">Solutions</a></li>
-              <li><a href="#impact" className="hover:text-white transition-colors">Impact Metrics</a></li>
+              <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
+              <li><Link href="/services" className="hover:text-white transition-colors">Services</Link></li>
+              <li><Link href="/about" className="hover:text-white transition-colors">About Us</Link></li>
+              <li><Link href="/gallery" className="hover:text-white transition-colors">Gallery</Link></li>
+              <li><Link href="/contact" className="hover:text-white transition-colors">Contact</Link></li>
             </ul>
           </div>
 
-          {/* Column 2: Resources */}
+          {/* Column 2: Home Sections */}
           <div className="space-y-4">
-            <h5 className="font-bold text-white uppercase tracking-wider text-xs">Resources</h5>
+            <h5 className="font-bold text-white uppercase tracking-wider text-xs">Credibility</h5>
             <ul className="space-y-2">
-              <li><a href="#case-studies" className="hover:text-white transition-colors">Case Studies</a></li>
-              <li><a href="#gallery" className="hover:text-white transition-colors">Screencasts & Gallery</a></li>
-              <li><a href="#home" className="hover:text-white transition-colors">Implementation Support</a></li>
-              <li><a href="#home" className="hover:text-white transition-colors">Syllabus Matrix</a></li>
+              <li><Link href="/#impact" className="hover:text-white transition-colors">Impact Metrics</Link></li>
+              <li><Link href="/#case-studies" className="hover:text-white transition-colors">Case Studies</Link></li>
+              <li><Link href="/#testimonials" className="hover:text-white transition-colors">Testimonials</Link></li>
+              <li><Link href="/#partners" className="hover:text-white transition-colors">Our Partners</Link></li>
             </ul>
           </div>
 
@@ -204,10 +212,9 @@ export default function Footer() {
           <div className="space-y-4">
             <h5 className="font-bold text-white uppercase tracking-wider text-xs">Regulatory</h5>
             <ul className="space-y-2">
-              <li><a href="#home" className="hover:text-white transition-colors">CSR Compliance</a></li>
-              <li><a href="#home" className="hover:text-white transition-colors">Privacy Policy</a></li>
-              <li><a href="#home" className="hover:text-white transition-colors">Terms of Service</a></li>
-              <li><a href="#home" className="hover:text-white transition-colors">Sitemap</a></li>
+              <li><Link href="/contact" className="hover:text-white transition-colors">CSR Compliance</Link></li>
+              <li><Link href="/" className="hover:text-white transition-colors">Privacy Policy</Link></li>
+              <li><Link href="/" className="hover:text-white transition-colors">Terms of Service</Link></li>
             </ul>
           </div>
 

@@ -12,6 +12,7 @@ import CaseStudies from "@/components/CaseStudies";
 import Gallery from "@/components/Gallery";
 import Testimonials from "@/components/Testimonials";
 import Partners from "@/components/Partners";
+import Pricing from "@/components/Pricing";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 import { DemoModal, VideoModal } from "@/components/Modals";
@@ -57,6 +58,9 @@ export default function Home() {
 
       {/* Partners marquee marquee scroll */}
       <Partners />
+
+      {/* Pricing options */}
+      <Pricing />
 
       {/* Action banner CTA */}
       <CTA onOpenDemoModal={() => setIsDemoModalOpen(true)} />

@@ -1,22 +1,17 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Inter } from "next/font/google";
+import { Mooli } from "next/font/google";
+import AITutorFloatingWidget from "@/components/AITutorFloatingWidget";
 import "./globals.css";
 
-const plusJakartaSans = Plus_Jakarta_Sans({
-  variable: "--font-heading",
+const mooli = Mooli({
+  variable: "--font-body",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-});
-
-const inter = Inter({
-  variable: "--font-sans",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400"],
 });
 
 export const metadata: Metadata = {
-  title: "WayInsight | Transforming Government School Classrooms via AR/VR",
-  description: "WayInsight brings immersive AR/VR-based learning experiences to government schools in India. Transforming education for students, teachers, and CSR partners.",
+  title: "WayInsight — Transforming Classroom Learning into Immersive Experiences",
+  description: "WayInsight delivers AR, VR, and AI-powered learning sessions into school classrooms across India. Zero upfront cost. Curriculum-aligned. Built for every student.",
 };
 
 export default function RootLayout({
@@ -27,11 +22,15 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${plusJakartaSans.variable} ${inter.variable} font-sans antialiased bg-white text-slate-900`}
+        className={`${mooli.variable} font-sans antialiased bg-white text-text-primary`}
       >
         {children}
+        <AITutorFloatingWidget />
       </body>
     </html>
   );
 }
+
+
+
 
